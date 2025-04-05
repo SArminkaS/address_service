@@ -1,10 +1,21 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { AddressService } from './address.service';
 
 @Controller('address')
 export class AddressController {
+    constructor(private readonly addressService: AddressService){}
+    
     @Get('getOne/:id')
-    getOne(@Param() param)
+    async getOne(@Param('id') id: string)
     {
-        return 1
+        const address = await this.addressService.getOne(id)
+        if(address==null)
+        {
+            throw new HttpException('Nem található a megadott cím!',HttpStatus.NOT_FOUND)
+        }
+        else
+        {
+            return address
+        }
     }
 }

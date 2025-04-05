@@ -5,6 +5,6 @@ export class AuthDto {
     @IsNotEmpty({message:'Adj meg egy nevet!'})
     username: string;
 
-    @IsNotEmpty({message:'Adj meg egy emailt!'})
+    @IsNotEmpty({message:'Adj meg egy jelszót!'})
     password: string;
 }

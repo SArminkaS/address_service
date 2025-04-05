@@ -1,10 +1,12 @@
-import { Controller, Get, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Param, UseGuards } from '@nestjs/common';
 import { AddressService } from './address.service';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('address')
 export class AddressController {
     constructor(private readonly addressService: AddressService){}
     
+    @UseGuards(AuthGuard)
     @Get('getOne/:id')
     async getOne(@Param('id') id: string)
     {

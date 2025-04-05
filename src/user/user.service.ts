@@ -7,4 +7,8 @@ export class UserService {
         {
             return await User.findByPk(username)
         }
+    async addOne(user: User)
+    {
+        return await user.save()
+    }
 }

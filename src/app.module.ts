@@ -6,6 +6,8 @@ import { AddressModule } from './address/address.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from './models/user.model';
+import { Address } from './models/address.model';
 
 @Module({
   imports: [
@@ -21,7 +23,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
         define:
         {
           timestamps:false
-        }
+        },
+        models: [User,Address]
       }),
       inject:[ConfigService]
     }),

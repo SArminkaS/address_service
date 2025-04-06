@@ -8,10 +8,7 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
-  app.enableCors({
-    origin: configService.get('CORS_ORIGIN'),
-    methods:'GET,POST,PUT,DELETE'
-  })
+  app.enableCors()
   app.useGlobalFilters(new SequelizeValidationFilter());
   app.useGlobalPipes(new ValidationPipe({transform:true}));
   await app.listen(configService.get('PORT') ?? 3002, configService.get<string>('HOST') ?? 'localhost');

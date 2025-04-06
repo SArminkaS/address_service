@@ -8,6 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new SequelizeValidationFilter());
   app.useGlobalPipes(new ValidationPipe({transform:true}));
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN,
+    methods:'GET,POST,PUT,DELETE'
+  })
   await app.listen(process.env.PORT || 3002);
 }
 bootstrap();
